@@ -1,6 +1,6 @@
 {
   "name": "react-native-sensors",
-  "version": "5.0.0-rc4",
+  "version": "5.0.0-rc4 HL",
   "description": "A developer friendly approach for sensors in react-native",
   "scripts": {
     "contributor:add": "all-contributors add",
@@ -13,15 +13,15 @@
     "travis-deploy-once": "travis-deploy-once"
   },
   "main": "index.js",
-  "repository": "git@github.com:react-native-sensors/react-native-sensors.git",
-  "homepage": "https://github.com/react-native-sensors/react-native-sensors",
+  "repository": "git@github.com:ilya1984hl/react-native-sensors.git",
+  "homepage": "https://github.com/ilya1984hl/react-native-sensors",
   "keywords": [
     "react-native"
   ],
   "author": {
-    "name": "Daniel Schmidt",
-    "email": "danielmschmidt92@gmail.com",
-    "url": "http://danielmschmidt.de"
+    "name": "Ilya Muragymov / fork from Daniel Schmidt",
+    "email": "ilya@highlander.io",
+    "url": "https://highlander.io"
   },
   "husky": {
     "hooks": {
