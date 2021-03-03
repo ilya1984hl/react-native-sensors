@@ -8,7 +8,7 @@ const {
   Accelerometer: AccNative,
   Magnetometer: MagnNative,
   Barometer: BarNative,
-  Orientation: OrientNative,
+  OrientationRN: OrientNative,
 } = NativeModules;
 
 const listenerKeys = new Map([

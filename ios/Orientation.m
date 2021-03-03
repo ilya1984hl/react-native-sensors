@@ -7,7 +7,7 @@
 #import "Orientation.h"
 #import "Utils.h"
 
-@implementation Orientation
+@implementation OrientationRN
 
 @synthesize bridge = _bridge;
 
