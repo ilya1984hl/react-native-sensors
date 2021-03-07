@@ -31,6 +31,24 @@ RCT_EXPORT_MODULE();
         self->locationManager = [[CLLocationManager alloc] init];
         self->locationManager.delegate = self;
         self->logLevel = 0;
+        self->locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        if (@available(iOS 8.0, *)) {
+            [self->locationManager requestWhenInUseAuthorization];
+        } else {
+            // Fallback on earlier versions
+        }
+        [self->locationManager startUpdatingLocation];
+        
+        if([CLLocationManager headingAvailable] == YES)
+        {
+            [self->locationManager startUpdatingHeading];
+        }
+        else
+        {
+            if (self->logLevel > 0) {
+                NSLog(@"Heading isn't available");
+            }
+        }
     }
     return self;
 }
@@ -50,12 +68,12 @@ RCT_EXPORT_METHOD(setLogLevel:(int) level) {
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    currentLocation = [locations lastObject];
+    self->currentLocation = [locations lastObject];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
 {
-    heading = newHeading.magneticHeading;
+    self->heading = newHeading.magneticHeading;
 }
 
 RCT_EXPORT_METHOD(getData:(RCTResponseSenderBlock) cb) {
@@ -66,9 +84,9 @@ RCT_EXPORT_METHOD(getData:(RCTResponseSenderBlock) cb) {
 
     cb(@[[NSNull null], @{
                  @"heading" : [NSNumber numberWithFloat: self->heading],
-                 @"long" : [NSNumber numberWithDouble: self->locationManager.location.coordinate.longitude],
-                 @"lat" : [NSNumber numberWithDouble: self->locationManager.location.coordinate.latitude],
-                 @"altitude": [NSNumber numberWithDouble: self->locationManager.location.altitude]
+                 @"long" : [NSNumber numberWithDouble: self->currentLocation.coordinate.longitude],
+                 @"lat" : [NSNumber numberWithDouble: self->currentLocation.coordinate.latitude],
+                 @"altitude": [NSNumber numberWithDouble: self->currentLocation.altitude]
              }]
        );
 }
