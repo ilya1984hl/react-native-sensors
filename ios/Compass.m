@@ -9,7 +9,7 @@
 #import "Utils.h"
 
 @interface Compass() <CLLocationManagerDelegate> {
-    float heading;
+    double heading;
     CLLocation *currentLocation;
     CLLocationManager *locationManager;
     int logLevel;
@@ -58,6 +58,11 @@ RCT_EXPORT_MODULE();
     return NO;
 }
 
+- (NSArray<NSString *> *)supportedEvents
+{
+  return @[@"Compass"];
+}
+
 RCT_EXPORT_METHOD(setLogLevel:(int) level) {
     if (level > 0) {
         NSLog(@"setLogLevel: %d", level);
@@ -83,9 +88,9 @@ RCT_EXPORT_METHOD(getData:(RCTResponseSenderBlock) cb) {
     }
 
     cb(@[[NSNull null], @{
-                 @"heading" : [NSNumber numberWithFloat: self->heading],
-                 @"long" : [NSNumber numberWithDouble: self->currentLocation.coordinate.longitude],
-                 @"lat" : [NSNumber numberWithDouble: self->currentLocation.coordinate.latitude],
+                 @"heading" : [NSNumber numberWithDouble: self->heading],
+                 @"long"    : [NSNumber numberWithDouble: self->currentLocation.coordinate.longitude],
+                 @"lat"     : [NSNumber numberWithDouble: self->currentLocation.coordinate.latitude],
                  @"altitude": [NSNumber numberWithDouble: self->currentLocation.altitude]
              }]
        );
