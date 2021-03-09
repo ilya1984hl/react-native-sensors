@@ -7,6 +7,7 @@ declare module "react-native-sensors" {
     magnetometer: "magnetometer";
     barometer: "barometer";
     orientation: "orientation";
+    compass: "compass";
   };
 
   export const SensorTypes: Sensors;
@@ -14,6 +15,13 @@ declare module "react-native-sensors" {
   export const setUpdateIntervalForType: (type: keyof Sensors, updateInterval: number) => void;
   
   export const setLogLevelForType: (type: keyof Sensors, logLevel: 0 | 1 | 2) => void;
+
+  export interface CompassData {
+    heading: number;
+    lat: number;
+    lon: number;
+    altitude: number;
+  }
 
   export interface SensorData {
     x: number;
@@ -44,9 +52,10 @@ declare module "react-native-sensors" {
     magnetometer: Observable<SensorData>;
     barometer: Observable<BarometerData>;
     orientation: Observable<OrientationData>;
+    compass: Observable<CompassData>;
   };
 
-  export const { accelerometer, gyroscope, magnetometer, barometer, orientation }: SensorsBase;
+  export const { accelerometer, gyroscope, magnetometer, barometer, orientation, compass }: SensorsBase;
 
   const sensors: SensorsBase;
 

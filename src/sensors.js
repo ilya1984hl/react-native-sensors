@@ -9,7 +9,12 @@ const {
   Magnetometer: MagnNative,
   Barometer: BarNative,
   OrientationRN: OrientNative,
+  Compass: CompNative,
 } = NativeModules;
+
+// const {
+//   Compass
+// } = Compass;
 
 const listenerKeys = new Map([
   ["accelerometer", "Accelerometer"],
@@ -25,6 +30,7 @@ const nativeApis = new Map([
   ["magnetometer", MagnNative],
   ["barometer", BarNative],
   ["orientation", OrientNative],
+
 ]);
 
 const eventEmitterSubscription = new Map([
@@ -33,6 +39,7 @@ const eventEmitterSubscription = new Map([
   ["magnetometer", null],
   ["barometer", null],
   ["orientation", null],
+  ["compass", null],
 ]);
 
 function createSensorObservable(sensorType) {
@@ -81,6 +88,7 @@ const gyroscope = createSensorObservable("gyroscope");
 const magnetometer = createSensorObservable("magnetometer");
 const barometer = createSensorObservable("barometer");
 const orientation = createSensorObservable("orientation");
+const compass = createSensorObservable("compass");
 
 export default {
   gyroscope,
@@ -88,4 +96,5 @@ export default {
   magnetometer,
   barometer,
   orientation,
+  compass,
 };
